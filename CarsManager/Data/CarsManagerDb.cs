@@ -1,4 +1,6 @@
-﻿using Data.Entity;
+﻿using System.IO;
+using System.Reflection;
+using Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
@@ -9,7 +11,8 @@ namespace Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=CarsManagerDb;");
+            optionsBuilder.UseSqlite(
+                $"Data Source={Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/db.sqlite");
             optionsBuilder.UseLazyLoadingProxies();
         }
     }

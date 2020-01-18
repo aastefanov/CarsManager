@@ -108,13 +108,11 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Car car = new Car()
-                {
-                    Model = editModel.Model,
-                    Year = editModel.Year,
-                    Engine = editModel.Engine,
-                    Brand = editModel.Brand
-                };
+                var car = _context.Cars.Find(editModel.Id);
+                car.Model = editModel.Model;
+                car.Year = editModel.Year;
+                car.Engine = editModel.Engine;
+                car.Brand = editModel.Brand;
 
                 try
                 {
@@ -144,6 +142,7 @@ namespace Web.Controllers
         {
             Car car = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

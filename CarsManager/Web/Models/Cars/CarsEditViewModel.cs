@@ -1,19 +1,16 @@
-﻿using Data.Enumeration;
+﻿using System.ComponentModel.DataAnnotations;
+using Data.Enumeration;
+using Web.Attributes;
 
 namespace Web.Models.Cars
 {
     public class CarsEditViewModel
     {
-       
-        public int Id { get; set; }
+        [Required] public int Id { get; set; }
+        [Required, StringLength(50)] public string Brand { get; set; }
+        [Required, StringLength(50)] public string Model { get; set; }
 
-       
-        public string Brand { get; set; }
-
-     
-        public string Model { get; set; }
-
-        public int Year { get; set; }
+        [Required, CarYear] public int Year { get; set; }
 
         public EngineEnum Engine { get; set; }
     }
